@@ -3,9 +3,6 @@ import random
 import sys
 import pygame
 
-# Neon Rush — Hard Mode
-# Built with Pygame; all graphics are drawn in code (no external assets required).
-
 WIDTH, HEIGHT = 520, 760
 FPS = 60
 ROAD_LEFT, ROAD_RIGHT = 80, 440
