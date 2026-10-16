@@ -4,14 +4,7 @@ import sys
 
 import pygame
 
-<<<<<<< HEAD
-=======
 
-# ----------------------------
-# Configuration
-# ----------------------------
-
->>>>>>> 1244f73 (second commit)
 WIDTH, HEIGHT = 520, 760
 FPS = 60
 
@@ -43,10 +36,6 @@ TRAFFIC_COLORS = [
 ]
 
 
-# ----------------------------
-# Game
-# ----------------------------
-
 class Game:
     def __init__(self):
         pygame.init()
@@ -66,9 +55,6 @@ class Game:
         self.high_score = self.load_high_score()
         self.state = self.new_game()
 
-    # ----------------------------
-    # Persistence
-    # ----------------------------
 
     @staticmethod
     def load_high_score():
@@ -86,9 +72,6 @@ class Game:
             # The game should still work if saving is unavailable.
             pass
 
-    # ----------------------------
-    # State
-    # ----------------------------
 
     @staticmethod
     def new_game():
@@ -115,9 +98,6 @@ class Game:
         self.start_button = None
         self.touch_start = None
 
-    # ----------------------------
-    # Drawing helpers
-    # ----------------------------
 
     @staticmethod
     def draw_text(surface, value, font, color, position, center=False):
@@ -309,9 +289,6 @@ class Game:
             26,
         )
 
-    # ----------------------------
-    # Spawning
-    # ----------------------------
 
     def safe_spawn_lanes(self):
         blocked_lanes = {
@@ -353,9 +330,6 @@ class Game:
             }
         )
 
-    # ----------------------------
-    # Game controls
-    # ----------------------------
 
     def move_lane(self, direction):
         if self.state["game_over"] or self.state["paused"]:
@@ -372,9 +346,6 @@ class Game:
         if not self.state["game_over"]:
             self.state["paused"] = not self.state["paused"]
 
-    # ----------------------------
-    # Game update
-    # ----------------------------
 
     def current_speed(self):
         return min(
@@ -431,7 +402,6 @@ class Game:
                 spawn_interval * random.uniform(0.72, 1.12)
             )
 
-        # Coin spawning
         self.state["coin_timer"] -= dt
 
         if self.state["coin_timer"] <= 0:
@@ -444,7 +414,6 @@ class Game:
             player=True,
         )
 
-        # Traffic update and collision
         for car in self.state["traffic"][:]:
             car["y"] += speed * dt
 
@@ -761,6 +730,10 @@ class Game:
 
         return button
 
+    # ----------------------------
+    # Event handling
+    # ----------------------------
+
     def handle_event(self, event):
         if event.type == pygame.QUIT:
             self.running = False
@@ -822,6 +795,7 @@ class Game:
             if self.touch_start is not None:
                 dx = event.pos[0] - self.touch_start[0]
 
+                # Swipe controls.
                 if (
                     not self.state["game_over"]
                     and not self.state["paused"]
@@ -831,6 +805,9 @@ class Game:
 
             self.touch_start = None
 
+    # ----------------------------
+    # Main loop
+    # ----------------------------
 
     def run(self):
         while self.running:
